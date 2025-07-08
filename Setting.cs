@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
 namespace PingoMeter
@@ -15,6 +16,7 @@ namespace PingoMeter
         public Setting()
         {
             InitializeComponent();
+            PopulateNetworkInterfaces();
             SyncFromConfig();
             labelVersion.Text = "Version " + Program.VERSION;
             toolTip1.SetToolTip(numbersModeCheckBox, "Use numbers for the ping instead of a graph.");
@@ -37,8 +39,40 @@ namespace PingoMeter
             loaded = true;
         }
 
+        private void PopulateNetworkInterfaces()
+        {
+            networkInterfaceComboBox.Items.Clear();
+            networkInterfaceComboBox.Items.Add(string.Empty); // Add empty option for default behavior
+
+            var adapters = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (var adapter in adapters)
+            {
+                if (adapter.OperationalStatus == OperationalStatus.Up)
+                {
+                    bool hasIPv4 = false;
+                    foreach (var uni in adapter.GetIPProperties().UnicastAddresses)
+                    {
+                        if (uni.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            hasIPv4 = true;
+                            break;
+                        }
+                    }
+
+                    if (hasIPv4)
+                    {
+                        networkInterfaceComboBox.Items.Add(adapter.Name);
+                    }
+                }
+            }
+
+            networkInterfaceComboBox.SelectedIndex = 0; // Select empty option by default
+        }
+
         private void SyncToConfig(IPAddress address)
         {
+            string selectedInterface = networkInterfaceComboBox.SelectedItem?.ToString() ?? string.Empty;
+            
             Config.SetAll(
                 delay: (int)delay.Value,
                 maxPing: (int)maxPing.Value,
@@ -55,7 +89,8 @@ namespace PingoMeter
                 _SFXConnectionLost: toolTip1.GetToolTip(connectionLostSFXBtn),
                 _SFXTimeOut: toolTip1.GetToolTip(pingTimeoutSFXBtn),
                 _SFXResumed: toolTip1.GetToolTip(connectionResumeSFXBtn),
-                offlineCounter: cbOfflineCounter.Checked);
+                offlineCounter: cbOfflineCounter.Checked,
+                networkInterfaceName: selectedInterface);
         }
 
         private void SyncFromConfig()
@@ -79,6 +114,19 @@ namespace PingoMeter
 
             if (Config.TheIPAddress != null)
                 ipAddress.Text = Config.TheIPAddress.ToString();
+
+            // Set the selected network interface
+            if (!string.IsNullOrEmpty(Config.NetworkInterfaceName))
+            {
+                for (int i = 0; i < networkInterfaceComboBox.Items.Count; i++)
+                {
+                    if (networkInterfaceComboBox.Items[i].ToString() == Config.NetworkInterfaceName)
+                    {
+                        networkInterfaceComboBox.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
 
             SetSoundInfoForButtom(pingTimeoutSFXBtn,      Config.SFXTimeOut);
             SetSoundInfoForButtom(connectionLostSFXBtn,   Config.SFXConnectionLost);

@@ -1,4 +1,4 @@
-﻿namespace PingoMeter
+namespace PingoMeter
 {
     partial class Setting
     {
@@ -53,6 +53,7 @@
             this.numbersModeCheckBox = new System.Windows.Forms.CheckBox();
             this.graphColorsGroupBox = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cbOfflineCounter = new System.Windows.Forms.CheckBox();
             this.cbStartupRun = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -65,13 +66,15 @@
             this.alarmTimeOut = new System.Windows.Forms.CheckBox();
             this.alarmResumed = new System.Windows.Forms.CheckBox();
             this.alarmConnectionLost = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.networkInterfaceComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelVersion = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cbOfflineCounter = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.delay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxPing)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -133,32 +136,16 @@
             // 
             this.delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.delay.Font = new System.Drawing.Font("Consolas", 9F);
-            this.delay.Increment = new decimal(new int[] {
-            250,
-            0,
-            0,
-            0});
+            this.delay.Increment = new decimal(new int[] { 250, 0, 0, 0 });
             this.delay.Location = new System.Drawing.Point(144, 7);
-            this.delay.Maximum = new decimal(new int[] {
-            60000,
-            0,
-            0,
-            0});
-            this.delay.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
+            this.delay.Maximum = new decimal(new int[] { 60000, 0, 0, 0 });
+            this.delay.Minimum = new decimal(new int[] { 50, 0, 0, 0 });
             this.delay.Name = "delay";
             this.delay.Size = new System.Drawing.Size(82, 22);
             this.delay.TabIndex = 1;
             this.delay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.delay.ThousandsSeparator = true;
-            this.delay.Value = new decimal(new int[] {
-            3000,
-            0,
-            0,
-            0});
+            this.delay.Value = new decimal(new int[] { 3000, 0, 0, 0 });
             // 
             // setBgColor
             // 
@@ -212,7 +199,7 @@
             // 
             this.apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.apply.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.apply.Location = new System.Drawing.Point(12, 353);
+            this.apply.Location = new System.Drawing.Point(12, 387);
             this.apply.Name = "apply";
             this.apply.Size = new System.Drawing.Size(75, 26);
             this.apply.TabIndex = 9;
@@ -223,7 +210,7 @@
             // reset
             // 
             this.reset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.reset.Location = new System.Drawing.Point(276, 353);
+            this.reset.Location = new System.Drawing.Point(276, 387);
             this.reset.Name = "reset";
             this.reset.Size = new System.Drawing.Size(75, 26);
             this.reset.TabIndex = 11;
@@ -234,7 +221,7 @@
             // cancel
             // 
             this.cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancel.Location = new System.Drawing.Point(93, 353);
+            this.cancel.Location = new System.Drawing.Point(93, 387);
             this.cancel.Name = "cancel";
             this.cancel.Size = new System.Drawing.Size(75, 26);
             this.cancel.TabIndex = 10;
@@ -255,32 +242,16 @@
             // 
             this.maxPing.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.maxPing.Font = new System.Drawing.Font("Consolas", 9F);
-            this.maxPing.Increment = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
+            this.maxPing.Increment = new decimal(new int[] { 50, 0, 0, 0 });
             this.maxPing.Location = new System.Drawing.Point(144, 34);
-            this.maxPing.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.maxPing.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.maxPing.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
+            this.maxPing.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             this.maxPing.Name = "maxPing";
             this.maxPing.Size = new System.Drawing.Size(82, 22);
             this.maxPing.TabIndex = 2;
             this.maxPing.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.maxPing.ThousandsSeparator = true;
-            this.maxPing.Value = new decimal(new int[] {
-            500,
-            0,
-            0,
-            0});
+            this.maxPing.Value = new decimal(new int[] { 500, 0, 0, 0 });
             // 
             // label7
             // 
@@ -302,9 +273,7 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -312,7 +281,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(30, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(339, 335);
+            this.tabControl1.Size = new System.Drawing.Size(339, 369);
             this.tabControl1.TabIndex = 12;
             // 
             // tabPage1
@@ -327,7 +296,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(331, 307);
+            this.tabPage1.Size = new System.Drawing.Size(331, 341);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Basic";
             // 
@@ -344,8 +313,7 @@
             // 
             // graphColorsGroupBox
             // 
-            this.graphColorsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.graphColorsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.graphColorsGroupBox.Controls.Add(this.label2);
             this.graphColorsGroupBox.Controls.Add(this.setBgColor);
             this.graphColorsGroupBox.Controls.Add(this.setGoodColor);
@@ -364,23 +332,36 @@
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.cbOfflineCounter);
             this.tabPage2.Controls.Add(this.cbStartupRun);
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.ipAddress);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.networkInterfaceComboBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(331, 307);
+            this.tabPage2.Size = new System.Drawing.Size(331, 341);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Advanced";
+            // 
+            // cbOfflineCounter
+            // 
+            this.cbOfflineCounter.AutoSize = true;
+            this.cbOfflineCounter.Location = new System.Drawing.Point(6, 295);
+            this.cbOfflineCounter.Name = "cbOfflineCounter";
+            this.cbOfflineCounter.Size = new System.Drawing.Size(132, 19);
+            this.cbOfflineCounter.TabIndex = 14;
+            this.cbOfflineCounter.Text = "Offline time counter";
+            this.cbOfflineCounter.UseVisualStyleBackColor = true;
             // 
             // cbStartupRun
             // 
             this.cbStartupRun.AutoSize = true;
-            this.cbStartupRun.Location = new System.Drawing.Point(6, 280);
+            this.cbStartupRun.Location = new System.Drawing.Point(6, 320);
             this.cbStartupRun.Name = "cbStartupRun";
             this.cbStartupRun.Size = new System.Drawing.Size(159, 19);
             this.cbStartupRun.TabIndex = 13;
@@ -395,7 +376,7 @@
             this.groupBox2.Controls.Add(this.connectionResumeSFXBtn);
             this.groupBox2.Controls.Add(this.connectionLostSFXBtn);
             this.groupBox2.Controls.Add(this.pingTimeoutSFXBtn);
-            this.groupBox2.Location = new System.Drawing.Point(6, 133);
+            this.groupBox2.Location = new System.Drawing.Point(6, 173);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(311, 116);
             this.groupBox2.TabIndex = 12;
@@ -467,7 +448,7 @@
             this.groupBox1.Controls.Add(this.alarmTimeOut);
             this.groupBox1.Controls.Add(this.alarmResumed);
             this.groupBox1.Controls.Add(this.alarmConnectionLost);
-            this.groupBox1.Location = new System.Drawing.Point(6, 34);
+            this.groupBox1.Location = new System.Drawing.Point(6, 74);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(311, 93);
             this.groupBox1.TabIndex = 10;
@@ -504,6 +485,24 @@
             this.alarmConnectionLost.Text = "Connection lost";
             this.alarmConnectionLost.UseVisualStyleBackColor = true;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 74);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(105, 15);
+            this.label12.TabIndex = 15;
+            this.label12.Text = "Network Interface:";
+            // 
+            // networkInterfaceComboBox
+            // 
+            this.networkInterfaceComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.networkInterfaceComboBox.FormattingEnabled = true;
+            this.networkInterfaceComboBox.Location = new System.Drawing.Point(145, 37);
+            this.networkInterfaceComboBox.Name = "networkInterfaceComboBox";
+            this.networkInterfaceComboBox.Size = new System.Drawing.Size(172, 23);
+            this.networkInterfaceComboBox.TabIndex = 16;
+            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
@@ -513,7 +512,7 @@
             this.tabPage3.Controls.Add(this.pictureBox1);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(331, 307);
+            this.tabPage3.Size = new System.Drawing.Size(331, 341);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "About";
             // 
@@ -556,22 +555,21 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // cbOfflineCounter
+            // label13
             // 
-            this.cbOfflineCounter.AutoSize = true;
-            this.cbOfflineCounter.Location = new System.Drawing.Point(6, 255);
-            this.cbOfflineCounter.Name = "cbOfflineCounter";
-            this.cbOfflineCounter.Size = new System.Drawing.Size(132, 19);
-            this.cbOfflineCounter.TabIndex = 14;
-            this.cbOfflineCounter.Text = "Offline time counter";
-            this.cbOfflineCounter.UseVisualStyleBackColor = true;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(7, 40);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(105, 15);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Network interface:";
             // 
             // Setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(364, 392);
+            this.ClientSize = new System.Drawing.Size(364, 426);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.reset);
             this.Controls.Add(this.cancel);
@@ -599,8 +597,9 @@
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-
         }
+
+        private System.Windows.Forms.Label label13;
 
         #endregion
 
@@ -646,5 +645,7 @@
         private System.Windows.Forms.Button connectionLostSFXBtn;
         private System.Windows.Forms.CheckBox cbStartupRun;
         private System.Windows.Forms.CheckBox cbOfflineCounter;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox networkInterfaceComboBox;
     }
 }

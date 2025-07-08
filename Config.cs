@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -25,6 +25,7 @@ namespace PingoMeter
 
         private static string ipName;
         private static IPAddress ipAddress;
+        public static string NetworkInterfaceName = string.Empty;
 
         public static IPAddress TheIPAddress
         {
@@ -58,7 +59,8 @@ namespace PingoMeter
         public static void SetAll(int delay, int maxPing, Color bgColor, Color goodColor, Color normalColor,
                                   Color badColor, bool runOnStartup, IPAddress address,
                                   bool alarmConnectionLost, bool alarmTimeOut, bool alarmResumed, bool useNumbers,
-                                  string _SFXConnectionLost, string _SFXTimeOut, string _SFXResumed, bool offlineCounter)
+                                  string _SFXConnectionLost, string _SFXTimeOut, string _SFXResumed, bool offlineCounter,
+                                  string networkInterfaceName)
         {
             Delay               = delay;
             MaxPing             = maxPing;
@@ -76,6 +78,7 @@ namespace PingoMeter
             SFXTimeOut          = _SFXTimeOut;
             SFXResumed          = _SFXResumed;
             OfflineCounter      = offlineCounter;
+            NetworkInterfaceName = networkInterfaceName;
         }
 
         public static void Reset()
@@ -97,6 +100,7 @@ namespace PingoMeter
             SFXTimeOut          = NONE_SFX;
             SFXResumed          = NONE_SFX;
             RunOnStartup        = false;
+            NetworkInterfaceName = string.Empty;
         }
 
         public static void Load()
@@ -182,6 +186,10 @@ namespace PingoMeter
                             case nameof(OfflineCounter):
                                 bool.TryParse(split[1], out OfflineCounter);
                                 break;
+                                
+                            case nameof(NetworkInterfaceName):
+                                NetworkInterfaceName = split[1];
+                                break;
                         }
                     }
                 }
@@ -235,6 +243,7 @@ namespace PingoMeter
             sb.AppendLine($"{nameof(SFXResumed)} {SFXResumed}");
 
             sb.AppendLine($"{nameof(OfflineCounter)} {OfflineCounter}");
+            sb.AppendLine($"{nameof(NetworkInterfaceName)} {NetworkInterfaceName}");
 
             File.WriteAllText(CONF_FILE_NAME, sb.ToString());
         }

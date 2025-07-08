@@ -1,10 +1,11 @@
-﻿using PingoMeter.vendor;
+using PingoMeter.vendor;
 using PingoMeter.vendor.StartupCreator;
 
 using System;
 using System.Drawing;
 using System.IO;
 using System.Media;
+using System.Net;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -119,6 +120,7 @@ namespace PingoMeter
         }
 
         private DateTime? offlineTimer = null;
+
         /// <summary>
         /// Drawing icon.
         /// </summary>
@@ -133,7 +135,6 @@ namespace PingoMeter
                 }
                 else
                 {
-
                     // Show offline seconds on icon
                     long offlineElapsed = 0;
                     if (!offlineTimer.HasValue)
@@ -268,9 +269,51 @@ namespace PingoMeter
                 {
                     try
                     {
-                        PingReply reply = p.Send(Config.TheIPAddress, 5000, buffer);
+                        // PingReply reply = p.Send(Config.TheIPAddress, 5000, buffer);
+                        IPStatus status;
+                        long roundtripTime = -1;
+                        
+                        if (string.IsNullOrEmpty(Config.NetworkInterfaceName))
+                        {
+                            // Use standard ping if no network interface is selected
+                            var standardReply = p.Send(Config.TheIPAddress, 5000, buffer);
+                            status = standardReply.Status;
+                            if (status == IPStatus.Success)
+                            {
+                                roundtripTime = standardReply.RoundtripTime;
+                            }
+                        }
+                        else
+                        {
+                            // Use the selected network interface for pinging
+                            IPAddress sourceIp = null;
+                            if (!string.IsNullOrEmpty(PingUtils.GetIpOfNicFromName(Config.NetworkInterfaceName)))
+                            {
+                                sourceIp = IPAddress.Parse(PingUtils.GetIpOfNicFromName(Config.NetworkInterfaceName));
+                            }
+                            
+                            if (sourceIp != null)
+                            {
+                                var customReply = PingUtils.Send(sourceIp, Config.TheIPAddress, 5000, buffer);
+                                status = customReply.Status;
+                                if (status == IPStatus.Success)
+                                {
+                                    roundtripTime = customReply.RoundtripTime;
+                                }
+                            }
+                            else
+                            {
+                                // Fallback to standard ping if we couldn't get the IP of the selected interface
+                                var standardReply = p.Send(Config.TheIPAddress, 5000, buffer);
+                                status = standardReply.Status;
+                                if (status == IPStatus.Success)
+                                {
+                                    roundtripTime = standardReply.RoundtripTime;
+                                }
+                            }
+                        }
 
-                        switch (reply.Status)
+                        switch (status)
                         {
                             case IPStatus.TimedOut:
                                 DrawGraph(-1L);
@@ -296,7 +339,7 @@ namespace PingoMeter
                                 break;
 
                             case IPStatus.Success:
-                                DrawGraph(reply.RoundtripTime);
+                                DrawGraph(roundtripTime);
 
                                 if (alarmStatus != AlarmEnum.None && alarmStatus != AlarmEnum.OK)
                                 {
@@ -313,7 +356,7 @@ namespace PingoMeter
                             default:
 
                                 DrawGraph(-1L);
-                                var statusName = GetIPStatusName(reply.Status);
+                                var statusName = GetIPStatusName(status);
                                 notifyIcon.Text = "Status: " + statusName;
 
 
