@@ -1,12 +1,13 @@
 # PingoMeter
 
-PingoMeter - is a small program that show your ping in Windows system tray (in graph or numbers).
+PingoMeter - is a small program that show your ping in Windows system tray (in graph or numbers). This is a fork from original tool, with support for network interface selection.
 
 ![](https://i.imgur.com/2C08toN.png)
 ![](https://i.imgur.com/kWFGqRa.png)
 
 ![](https://i.imgur.com/tJKTuKD.png)
-![](https://i.imgur.com/X2ezh5Y.png)
+![](https://github.com/user-attachments/assets/a21cc322-f74d-4eba-a187-bf031f0f21ca)
+
 
 ## Run at startup
 
